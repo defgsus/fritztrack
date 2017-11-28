@@ -57,6 +57,10 @@ class FritzBrowser(object):
     def open_log(self):
         return self.open_link("log")
 
+    def open_capture(self):
+        self.get("http://fritz.box/html/capture.html")
+        self.login()
+
     def get_log_strings(self):
         elems = self.driver.find_elements_by_css_selector("a.print")
         return [e.text for e in elems]

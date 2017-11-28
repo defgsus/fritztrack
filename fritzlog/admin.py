@@ -7,7 +7,7 @@ from .models import *
 
 
 class LogAdmin(admin.ModelAdmin):
-    list_display = ("name", "count", "date_started", "date_finished", "duration", "log_text", "error_text")
+    list_display = ("id", "name", "count", "date_started", "date_finished", "duration", "log_text", "error_text")
     ordering = ("-date_finished", )
 
 
@@ -17,12 +17,17 @@ class RawLogAdmin(admin.ModelAdmin):
 
 
 class MacAddressAdmin(admin.ModelAdmin):
-    list_display = ("mac", "name")
+    list_display = ("id", "mac", "name")
     ordering = ("mac", )
 
 
 class UserActionAdmin(admin.ModelAdmin):
-    list_display = ("date_decorator", "mac", "user_decorator", "ip", "action")
+    list_display = ("id", "date_decorator", "mac", "user_decorator", "ip", "action")
+    ordering = ("-date", )
+
+
+class ConnectedDeviceAdmin(admin.ModelAdmin):
+    list_display = ("id", "date_decorator", "mac", "user_decorator", "speed", "signal_strength")
     ordering = ("-date", )
 
 
@@ -30,3 +35,4 @@ admin.site.register(Log, LogAdmin)
 admin.site.register(RawLog, RawLogAdmin)
 admin.site.register(MacAddress, MacAddressAdmin)
 admin.site.register(UserAction, UserActionAdmin)
+admin.site.register(ConnectedDevice, ConnectedDeviceAdmin)

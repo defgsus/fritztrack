@@ -8,6 +8,6 @@ and django-kronos for the cron-job integration
 
 # dependencies
 
-Python 2.7, Django 1.11
+Python 2.7, Django 1.11, fritzconnection 0.6.5
 
 Testet with Fritz!Box 7490, Fritz!OS 6.90 (**german**)

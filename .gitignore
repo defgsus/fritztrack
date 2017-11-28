@@ -2,6 +2,8 @@
 /static/
 media/
 *credentials*
+test_fc.py
+test_soap.py
 
 # libreoffice
 .~lock*.o*
