@@ -28,10 +28,18 @@ def get_logs(browser=None, log=None):
         dt = datetime.datetime(2000+int(date[2]), int(date[1]), int(date[0]),
                                int(time[0]), int(time[1]), int(time[2]))
 
-        obj, created = RawLog.objects.get_or_create(date=dt, text=text[:2000])
-        if created:
-            num_created += 1
+        text = text[:2000].strip()
         num_logs += 1
+
+        if RawLog.objects.filter(date=dt, text=text).exists():
+            continue
+        # also check for seconds +/- 1, because for some reason the log seems to change the seconds
+        if RawLog.objects.filter(date=dt + datetime.timedelta(seconds=1), text=text).exists():
+            continue
+        if RawLog.objects.filter(date=dt - datetime.timedelta(seconds=1), text=text).exists():
+            continue
+        RawLog.objects.create(date=dt, text=text)
+        num_created += 1
 
     log.log("%s found, %s new" % (num_logs, num_created))
 

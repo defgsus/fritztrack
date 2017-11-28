@@ -13,3 +13,8 @@ class RawLog(models.Model):
     date = models.DateTimeField(verbose_name=_("date"))
     text = models.CharField(verbose_name=_("text"), max_length=2000)
 
+    def date_decorator(self):
+        return "%s" % self.date
+    date_decorator.short_description = _("date")
+    date_decorator.admin_order_field = "date"
+
