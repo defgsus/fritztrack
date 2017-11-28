@@ -1,0 +1,6 @@
+# python 2.7
+Django==1.11.7
+selenium==3.7.0
+django-kronos==1.0
+
+#requests==2.18.4

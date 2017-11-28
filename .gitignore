@@ -1,0 +1,50 @@
+# Django App specifics
+/static/
+media/
+*credentials*
+
+# libreoffice
+.~lock*.o*
+
+# seed catalogs
+*.pdf
+
+# Python & VirtualEnv
+/env/
+/venv/
+*.py[cod]
+
+# IntelliJ IDEA Project
+/.idea/
+
+# Node modules
+/node_modules/
+
+#sass project files
+.sass-cache/
+
+db.sqlite3
+
+# System Junk
+*.so
+*~
+*.swp
+*.swo
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.vi
+.DS_Store
+Thumbs.db
+.cache
+.project
+.settings
+_notes
+dwsync.xml
+*.iml
+
+
+# local settings
+settings_local.py
