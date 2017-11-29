@@ -26,4 +26,4 @@ def fritz_worker():
         with LoggerContext(log, "get_connected"):
             get_connected(log=log)
         with LoggerContext(log, "get_traffic"):
-            get_traffic(num_seconds=25, browser=browser, log=log)
+            get_traffic(num_seconds=30, browser=browser, log=log)

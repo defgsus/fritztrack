@@ -27,7 +27,12 @@ class UserActionAdmin(admin.ModelAdmin):
 
 
 class ConnectedDeviceAdmin(admin.ModelAdmin):
-    list_display = ("id", "date_decorator", "mac", "user_decorator", "speed", "signal_strength")
+    list_display = ("id", "date_decorator", "mac", "ip", "user_decorator", "speed", "signal_strength")
+    ordering = ("-date", )
+
+
+class CaptureAdmin(admin.ModelAdmin):
+    list_display = ("id", "date_decorator", "seconds", "size", "filename_decorator")
     ordering = ("-date", )
 
 
@@ -36,3 +41,5 @@ admin.site.register(RawLog, RawLogAdmin)
 admin.site.register(MacAddress, MacAddressAdmin)
 admin.site.register(UserAction, UserActionAdmin)
 admin.site.register(ConnectedDevice, ConnectedDeviceAdmin)
+admin.site.register(Capture, CaptureAdmin)
+

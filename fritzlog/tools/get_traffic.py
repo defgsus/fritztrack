@@ -9,7 +9,7 @@ import requests
 from django.conf import settings
 
 from .fritz_browser import FritzBrowser
-from ..models import RawLog, DummyLogger
+from ..models import DummyLogger, Capture
 
 
 
@@ -32,8 +32,10 @@ def get_traffic(num_seconds=10, browser=None, log=None):
     )
     if not os.path.exists(filepath):
         os.makedirs(filepath)
-    now_str = ("%s" % datetime.datetime.now().replace(microsecond=0)).replace(":", "-").replace(" ", "-")
-    filename = os.path.join(filepath, ("%s.eth" % now_str))
+    now = datetime.datetime.now().replace(microsecond=0)
+    now_str = ("%s" % now).replace(":", "-").replace(" ", "-")
+    short_filename = "%s.eth" % now_str
+    filename = os.path.join(filepath, short_filename)
 
     thread = threading.Thread(target=lambda: _store_capture(start_url, filename, log))
     log.log("starting capture thread")
@@ -42,6 +44,13 @@ def get_traffic(num_seconds=10, browser=None, log=None):
     requests.get(stop_url)
     if thread.is_alive():
         thread.join()
+    Capture.objects.create(
+        date=now,
+        seconds=num_seconds,
+        filename=short_filename,
+        size=os.path.getsize(filename),
+    )
+
 
     return
 

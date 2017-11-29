@@ -8,11 +8,10 @@ and django-kronos for the cron-job integration
 
 ## dependencies
 
-Python 2.7, Django 1.11, fritzconnection 0.6.5
-
-phantomjs webdriver binary
-
-Testet with Fritz!Box 7490, Fritz!OS 6.90 (**german**)
+- Python 2.7, Django 1.11, fritzconnection 0.6.5
+- phantomjs webdriver binary
+- tshark and pyshark
+- testet with Fritz!Box 7490, Fritz!OS 6.90 (**german**)
 
 ## how to run
 

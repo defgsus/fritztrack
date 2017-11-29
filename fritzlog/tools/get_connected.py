@@ -26,6 +26,7 @@ def get_connected(log=None):
         obj, created = ConnectedDevice.objects.get_or_create(
             date=now,
             mac=res["NewAssociatedDeviceMACAddress"].upper(),
+            ip=res["NewAssociatedDeviceIPAddress"],
             speed=res["NewX_AVM-DE_Speed"],
             signal_strength=res["NewX_AVM-DE_SignalStrength"],
         )

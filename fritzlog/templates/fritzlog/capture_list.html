@@ -1,0 +1,17 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<table>
+    <tr><td>date</td><td>file</td></tr>
+    {% for cap in capture_list %}
+        <tr>
+            <td>{{ cap.date }}</td>
+            <td><a href="{{ cap.file_url }}">{{ cap.short_filename }}</a></td>
+            <td><a href="{{ cap.view_url }}">view</a></td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

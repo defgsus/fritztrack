@@ -1,0 +1,36 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<table>
+    <tr><td>user</td><td>connections</td></tr>
+    {% for con in connection_list %}
+        <tr>
+            <td>{{ con.0 }}</td>
+            <td>
+                <table>
+                {% for dst in con.1 %}
+                    <tr><td>{{ dst.0 }}x</td><td>{{ dst.1 }}</td></tr>
+                {% endfor %}
+                </table>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+{% if capture_table %}
+    <table>
+        <tr><td>#</td><td>time</td><td>src</td><td>dst</td></tr>
+        {% for cap in capture_table %}
+            <tr>
+                <td>{{ cap.0 }}</td>
+                <td>{{ cap.1 }}</td>
+                <td>{{ cap.2 }}</td>
+                <td>{{ cap.3 }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+{% endblock %}

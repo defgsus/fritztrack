@@ -1,7 +1,7 @@
 # python 2.7
 Django==1.11.7
 selenium==3.7.0
+requests==2.18.4
 django-kronos==1.0
 fritzconnection==0.6.5
-
-#requests==2.18.4
+pyshark==0.3.7.11
