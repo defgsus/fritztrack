@@ -4,6 +4,7 @@ media/
 *credentials*
 test_fc.py
 test_soap.py
+fritzlog/tools/fritzdebug/
 
 # libreoffice
 .~lock*.o*

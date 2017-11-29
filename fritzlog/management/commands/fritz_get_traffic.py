@@ -9,16 +9,16 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Command(BaseCommand):
-    help = _('Parse the RawLog data')
+    help = _('Capture some traffic from Fritzbox')
 
     def handle(self, *args, **options):
         starttime = datetime.datetime.now()
 
-        from fritzlog.tools.parse_logs import parse_logs
-        from fritzlog.models import Logger
+        from fritzlog.tools.get_traffic import get_traffic
+        #from fritzlog.models import Logger
 
-        with Logger("get_logs") as log:
-            parse_logs(log)
+        #with Logger("get_logs") as log:
+        get_traffic()#log=log)
 
         endtime = datetime.datetime.now()
         print("TOOK %s" % (endtime - starttime))

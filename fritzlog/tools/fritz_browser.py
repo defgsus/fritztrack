@@ -15,8 +15,10 @@ class FritzBrowser(object):
     def __init__(self):
         self.driver = webdriver.PhantomJS()
         #self.driver = webdriver.Chrome()
+        #self.driver = webdriver.Firefox()
         self.get("http://fritz.box")
         self.links = []
+        self._sid = None
 
     def __del__(self):
         self.driver.close()
@@ -37,6 +39,11 @@ class FritzBrowser(object):
         elems = self.driver.find_elements_by_css_selector("a.menu_item")
         self.links = [e.get_attribute("href") for e in elems]
         return self.links
+
+    def get_session_id(self):
+        if self._sid is None:
+            self._sid = self.driver.execute_script("return main.sid")
+        return self._sid
 
     def open_link(self, name):
         qname = "lp=%s" % name
@@ -60,6 +67,16 @@ class FritzBrowser(object):
     def open_capture(self):
         self.get("http://fritz.box/html/capture.html")
         self.login()
+
+    def get_capture_url(self, iface="3-0"):
+        sid = self.get_session_id()
+        return "http://fritz.box/cgi-bin/capture_notimeout?sid=%s&capture=Start&snaplen=1600&ifaceorminor=%s" % (
+            sid, iface,
+        )
+
+    def get_capture_stop_url(self):
+        sid = self.get_session_id()
+        return "http://fritz.box/cgi-bin/capture_notimeout?iface=all&minor=0&type=3&capture=Stop&sid=%s&xhr=1" % sid
 
     def get_log_strings(self):
         elems = self.driver.find_elements_by_css_selector("a.print")
