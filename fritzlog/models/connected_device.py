@@ -12,7 +12,7 @@ class ConnectedDevice(models.Model):
 
     date = models.DateTimeField(verbose_name=_("date"))
     mac = models.CharField(verbose_name=_("MAC"), max_length=20)
-    ip = models.CharField(verbose_name=_("IP"), max_length=20)
+    ip = models.CharField(verbose_name=_("IP"), max_length=40)
     speed = models.IntegerField(verbose_name=_("speed"))
     signal_strength = models.IntegerField(verbose_name=_("signal strength"))
 

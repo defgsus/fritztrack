@@ -50,16 +50,20 @@ def ip_to_name(ip, date=None):
 def get_connections(capture):
     ip_dict = dict()
     for pkt in capture:
-        if not hasattr(pkt, "ip"):
+        if not hasattr(pkt, "ip") and not hasattr(pkt, "ipv6"):
             continue
 
-        if pkt.ip.src.startswith("192.168.178"):
-            ip, dst = pkt.ip.src, pkt.ip.dst
-        else:
-            ip, dst = pkt.ip.dst, pkt.ip.src
+        if hasattr(pkt, "ip"):
+            if pkt.ip.src.startswith("192.168.178"):
+                ip, dst = pkt.ip.src, pkt.ip.dst
+            else:
+                ip, dst = pkt.ip.dst, pkt.ip.src
 
-        if hasattr(pkt.ip, "geoasnum") and pkt.ip.geoasnum:
-            dst += " (%s)" % pkt.ip.geoasnum
+            if hasattr(pkt.ip, "geoasnum") and pkt.ip.geoasnum:
+                dst += " (%s)" % pkt.ip.geoasnum
+        else:
+            # TODO: how to discern src and dst in IPv6?
+            ip, dst = pkt.ipv6.src, pkt.ipv6.dst
 
         if ip not in ip_dict:
             ip_dict[ip] = {dst: 1}

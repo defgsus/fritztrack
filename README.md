@@ -12,9 +12,11 @@ Django Admin is used to browse the data.
 ## Dependencies
 
 - Python 2.7, Django 1.11, fritzconnection 0.6.5
-- phantomjs webdriver binary
+- [phantomjs webdriver binary](http://phantomjs.org/download)
 - tshark and pyshark (for basic analysis of captured packets)
-- testet with Fritz!Box 7490, Fritz!OS 6.90 (**german**)
+- `gcc libxml2-dev libxslt-dev libpython-dev tshark`
+- tested with Fritz!Box 7412, 7490, Fritz!OS 6.90 (**german**)
+    - The scraping of the web interface depends on german language at some places
 
 ## How to run
 
