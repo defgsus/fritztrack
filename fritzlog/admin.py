@@ -32,7 +32,27 @@ class ConnectedDeviceAdmin(admin.ModelAdmin):
 
 
 class CaptureAdmin(admin.ModelAdmin):
-    list_display = ("id", "date_decorator", "seconds", "size", "filename_decorator")
+    list_display = ("id", "date_decorator", "seconds", "size", "filename_decorator", "is_parsed")
+    ordering = ("-date", )
+
+
+class NslookupRequestAdmin(admin.ModelAdmin):
+    list_display = ("id", "date_decorator", "ip", "response_decorator")
+    ordering = ("-date", )
+
+
+class GeoIpAdmin(admin.ModelAdmin):
+    list_display = ("id", "date_decorator", "ip", "asnum", "city", "country", "lat", "lon")
+    ordering = ("-date", )
+
+
+class WhoisRequestAdmin(admin.ModelAdmin):
+    list_display = ("id", "date_decorator", "ip", "response_decorator")
+    ordering = ("-date", )
+
+
+class DnsResponseAdmin(admin.ModelAdmin):
+    list_display = ("id", "date_decorator", "query_name", "cname", "ip")
     ordering = ("-date", )
 
 
@@ -42,4 +62,7 @@ admin.site.register(MacAddress, MacAddressAdmin)
 admin.site.register(UserAction, UserActionAdmin)
 admin.site.register(ConnectedDevice, ConnectedDeviceAdmin)
 admin.site.register(Capture, CaptureAdmin)
-
+admin.site.register(NslookupRequest, NslookupRequestAdmin)
+admin.site.register(GeoIp, GeoIpAdmin)
+admin.site.register(WhoisRequest, WhoisRequestAdmin)
+admin.site.register(DnsResponse, DnsResponseAdmin)

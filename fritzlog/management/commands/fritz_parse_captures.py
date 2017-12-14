@@ -9,16 +9,16 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Command(BaseCommand):
-    help = _('Parse the RawLog data')
+    help = _('Parse all (new) capture files and store everything to db')
 
     def handle(self, *args, **options):
         starttime = datetime.datetime.now()
 
-        from fritzlog.tools.parse_logs import parse_logs
+        from fritzlog.tools.parse_captures import parse_captures
         from fritzlog.models import Logger
 
-        with Logger("parse_logs") as log:
-            parse_logs(log)
+        with Logger("parse_captures") as log:
+            parse_captures(log)
 
         endtime = datetime.datetime.now()
         print("TOOK %s" % (endtime - starttime))

@@ -8,6 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.urls import reverse
 
+from picklefield import PickledObjectField
+
 
 class Capture(models.Model):
     class Meta:
@@ -21,6 +23,7 @@ class Capture(models.Model):
 
     is_parsed = models.BooleanField(verbose_name=_("is parsed"), default=False)
 
+    connections = PickledObjectField(verbose_name=_("connections"), default=None, null=True, blank=True)
 
     def full_filename(self):
         return os.path.join(settings.MEDIA_ROOT, "capture", self.filename[:10], self.filename)

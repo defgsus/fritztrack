@@ -2,18 +2,15 @@
 
 {% block content %}
 
+<h3>{{ capture.date_decorator }} - {{ capture.seconds }}sec - {{ capture.size }}b</h3>
+
 <table>
-    <tr><td>user</td><td>connections</td></tr>
+    <tr><td>user</td><td># packets</td><td>protocol</td><td>tcp port</td><td>destination</td></tr>
     {% for con in connection_list %}
         <tr>
-            <td>{{ con.0 }}</td>
-            <td>
-                <table>
-                {% for dst in con.1 %}
-                    <tr><td>{{ dst.0 }}x</td><td>{{ dst.1 }}</td></tr>
-                {% endfor %}
-                </table>
-            </td>
+            {% for info in con %}
+                <td>{{ info|safe }}</td>
+            {% endfor %}
         </tr>
     {% endfor %}
 </table>

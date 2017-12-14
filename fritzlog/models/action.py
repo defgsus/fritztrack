@@ -21,7 +21,7 @@ class UserAction(models.Model):
 
     date = models.DateTimeField(verbose_name=_("date"))
     mac = models.CharField(verbose_name=_("MAC"), max_length=20)
-    ip = models.CharField(verbose_name=_("IP"), max_length=20)
+    ip = models.CharField(verbose_name=_("IP"), max_length=40)
     action = models.CharField(verbose_name=_("action"), max_length=50,
                               choices=ACTION_CHOICES)
 

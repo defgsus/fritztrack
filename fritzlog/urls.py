@@ -9,6 +9,6 @@ from . import views
 app_name = "fritzlog"
 urlpatterns = [
     url(r'^$',                                      views.index_view,           name='index'),
-    url(r'^captures/?$',                            views.capture_list,         name='capture_list'),
+    url(r'^captures/?$',                            views.capture_sum_view,     name='captures'),
     url(r'^capture/(?P<fn>[0-9\-]+)?$',             views.capture_view,         name='capture_view'),
 ]
