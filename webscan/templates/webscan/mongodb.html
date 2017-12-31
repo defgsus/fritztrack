@@ -1,0 +1,39 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<form>
+    <input type="text" name="host" value="{{host}}" />
+    <input type="number" name="port" value="{{port}}" />
+    <input type="submit" value="scan" />
+</form>
+
+<hr/>
+
+{% if model %}
+    <p>date: <b>{{ model.date }}</b></p>
+
+    <pre>
+    {{ model.data }}
+    </pre>
+
+    <ul>
+        {% for db in model.data %}
+        <li><b>{{ db.name }}</b> ({{ db.sizeOnDisk }})
+            <ul>
+                {% for col in db.collections %}
+                    <li><a href="?host={{host}}&port={{port}}&database={{ db.name }}&collection={{ col.name }}">{{ col.name }}</a>
+                        {% if col.readOnly %}(readonly){% endif %}
+                        {% if db.name == database_name and col.name == collection_name %}
+                            <pre>{{ detail }}</pre>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+
+{% endif %}
+
+{% endblock %}

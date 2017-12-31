@@ -6,3 +6,4 @@ django-kronos==1.0
 fritzconnection==0.6.5
 pyshark==0.3.7.11
 django-picklefield==1.0.0
+pymongo==3.6.0

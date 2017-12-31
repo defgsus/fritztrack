@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'kronos',
     'fritzlog.apps.FritzlogConfig',
+    'webscan.apps.WebscanConfig',
 ]
 
 MIDDLEWARE = [
