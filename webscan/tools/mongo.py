@@ -2,8 +2,8 @@
 from django.utils import timezone
 
 from pymongo import MongoClient
+from pymongo.errors import PyMongoError
 from ..models import MongoDbConnection
-
 
 
 def scan_for_mongodb(host, port=27017):
@@ -34,7 +34,7 @@ def scan_for_mongodb(host, port=27017):
             date=today,
             data=databases
         )
-    except ValueError as e:
+    except PyMongoError as e:
         model = MongoDbConnection.objects.create(
             host=host,
             port=port,
@@ -54,5 +54,5 @@ def get_mongodb_detail(host, port, database_name, collection_name):
         col = db.get_collection(collection_name)
         return list(col.find()[:10])
 
-    except ValueError as e:
+    except PyMongoError as e:
         return "%s" % e

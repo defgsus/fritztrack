@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import re
 import json
+import datetime
 from pymongo.collection import ObjectId
 
 from django.shortcuts import render
@@ -10,16 +12,11 @@ from webscan.tools.mongo import scan_for_mongodb, get_mongodb_detail
 
 
 class MongoSerializer(json.JSONEncoder):
-    DATE_FORMAT = "%Y-%m-%d"
-    TIME_FORMAT = "%H:%M:%S"
     def default(self, obj):
-        if isinstance(obj, ObjectId):
-            return {
-                "_type": "string",
-                "value": "%s" % obj,
-            }
-        return super(MongoSerializer, self).default(obj)
-
+        try:
+            return super(MongoSerializer, self).default(obj)
+        except TypeError:
+            return "%s" % obj
 
 def mongodb_view(request):
 

@@ -13,26 +13,34 @@
 {% if model %}
     <p>date: <b>{{ model.date }}</b></p>
 
-    <pre>
-    {{ model.data }}
-    </pre>
+    {% if model.data.error %}
+        <div class="error">{{ model.data.error }}</div>
+    {% else %}
+        <pre>
+        {{ model.data }}
+        </pre>
 
-    <ul>
-        {% for db in model.data %}
-        <li><b>{{ db.name }}</b> ({{ db.sizeOnDisk }})
-            <ul>
-                {% for col in db.collections %}
-                    <li><a href="?host={{host}}&port={{port}}&database={{ db.name }}&collection={{ col.name }}">{{ col.name }}</a>
-                        {% if col.readOnly %}(readonly){% endif %}
-                        {% if db.name == database_name and col.name == collection_name %}
-                            <pre>{{ detail }}</pre>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </li>
-        {% endfor %}
-    </ul>
+        <ul>
+            {% for db in model.data %}
+            <li><b>{{ db.name }}</b> ({{ db.sizeOnDisk }})
+                <ul>
+                    {% for col in db.collections %}
+                        <li>
+                            {% if db.name == database_name and col.name == collection_name %}
+                                <a href="?host={{host}}&port={{port}}">{{ col.name }}</a>
+                                {% if col.readOnly %}(readonly){% endif %}
+                                <pre>{{ detail }}</pre>
+                            {% else %}
+                                <a href="?host={{host}}&port={{port}}&database={{ db.name }}&collection={{ col.name }}">{{ col.name }}</a>
+                                {% if col.readOnly %}(readonly){% endif %}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
 {% endif %}
 
